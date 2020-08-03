@@ -5,6 +5,7 @@ module ApplicationLoader
 
   def load_app!
     require_app
+    init_app
   end
 
   private
@@ -13,12 +14,16 @@ module ApplicationLoader
     require_file 'config/application.rb'
   end
 
+  def init_app
+    require_dir 'config/initializers'
+  end
+
   def require_file(path)
     require File.join(root, path)
   end
 
   def require_dir(path)
-    require File.join(root, path)
+    path = File.join(root, path)
     Dir["#{path}/**/*.rb"].sort.each { |file| require file }
   end
 

@@ -16,6 +16,6 @@ class Application < Sinatra::Base
   get '/' do
     status 200
 
-    json status: :ok
+    json page_size: Settings.pagination.page_size
   end
 end
