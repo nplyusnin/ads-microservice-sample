@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
-app = ->(_env) { [200, { 'Content-Type' => 'text/plain' }, []] }
+require_relative 'config/environment'
 
-run app
+map '/ads' do
+  run Application
+end
