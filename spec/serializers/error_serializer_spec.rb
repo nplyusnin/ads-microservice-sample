@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 RSpec.describe ErrorSerializer do
   subject { described_class }
 
@@ -51,7 +53,7 @@ RSpec.describe ErrorSerializer do
         errors: {
           blue: ['не может быть пустым'],
           green: [
-            'не может быть пустым', 
+            'не может быть пустым',
             'имеет непредусмотренное значение'
           ]
         }

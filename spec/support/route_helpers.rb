@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module RouteHelpers
   def app
     described_class
