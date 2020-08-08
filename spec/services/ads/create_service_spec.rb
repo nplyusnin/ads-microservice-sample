@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 RSpec.describe Ads::CreateService do
   subject { described_class }
 
