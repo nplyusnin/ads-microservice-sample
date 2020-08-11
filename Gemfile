@@ -22,6 +22,8 @@ gem 'dry-validation'
 gem 'activesupport'
 gem 'fast_jsonapi'
 
+gem 'httparty'
+
 group :development, :test do
   gem 'byebug'
 end

@@ -1,11 +1,12 @@
 # frozen_string_literal: true
 
 class AdRoutes < Application
+  AUTH_TOKEN = /\ABearer (?<token>.+)\z/.freeze
+
   helpers PaginationLinks
 
   namespace '/v1' do
     get do
-      byebug
       page = params[:page].presence || 1
       ads = Ad.reverse_order(:updated_at)
       ads = ads.paginate(page.to_i, Settings.pagination.page_size)
@@ -15,11 +16,12 @@ class AdRoutes < Application
     end
 
     post do
+      user_id = AuthService::Api.auth(matched_token)
       ad_params = validate_with!(AdParamsContract)
 
       result = Ads::CreateService.call(
         ad: ad_params[:ad],
-        user_id: params[:user_id]
+        user_id: user_id
       )
 
       if result.success?
@@ -31,6 +33,17 @@ class AdRoutes < Application
         status 422
         error_response result.ad
       end
+    end
+
+    def matched_token
+      result = auth_header&.match(AUTH_TOKEN)
+      return if result.blank?
+  
+      result[:token]
+    end
+  
+    def auth_header
+      request.env['HTTP_AUTHORIZATION']
     end
   end
 end
