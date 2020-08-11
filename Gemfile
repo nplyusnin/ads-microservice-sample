@@ -22,6 +22,10 @@ gem 'dry-validation'
 gem 'activesupport'
 gem 'fast_jsonapi'
 
+group :development, :test do
+  gem 'byebug'
+end
+
 group :test do
   gem 'database_cleaner-sequel'
   gem 'factory_bot'

@@ -5,6 +5,7 @@ class AdRoutes < Application
 
   namespace '/v1' do
     get do
+      byebug
       page = params[:page].presence || 1
       ads = Ad.reverse_order(:updated_at)
       ads = ads.paginate(page.to_i, Settings.pagination.page_size)
