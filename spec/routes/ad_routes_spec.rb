@@ -19,9 +19,11 @@ RSpec.describe AdRoutes, type: :routes do
   describe 'POST /v1' do
     let(:token) { 'validtoken' }
     let(:user_id) { 101 }
+    let(:coordinates) { [43.1, 45.5] }
 
     before do
       allow(AuthService::Api).to receive(:auth).and_return(user_id)
+      allow(GeoService::Api).to receive(:geocode).and_return(coordinates)
     end
 
     context 'missing parameters' do

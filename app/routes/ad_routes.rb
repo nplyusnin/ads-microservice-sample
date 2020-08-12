@@ -16,12 +16,15 @@ class AdRoutes < Application
     end
 
     post do
-      user_id = AuthService::Api.auth(matched_token)
       ad_params = validate_with!(AdParamsContract)
+
+      user_id = AuthService::Api.auth(matched_token)
+      coordinates = GeoService::Api.geocode(ad_params[:ad][:city])
 
       result = Ads::CreateService.call(
         ad: ad_params[:ad],
-        user_id: user_id
+        user_id: user_id,
+        coordinates: coordinates
       )
 
       if result.success?
@@ -38,10 +41,10 @@ class AdRoutes < Application
     def matched_token
       result = auth_header&.match(AUTH_TOKEN)
       return if result.blank?
-  
+
       result[:token]
     end
-  
+
     def auth_header
       request.env['HTTP_AUTHORIZATION']
     end

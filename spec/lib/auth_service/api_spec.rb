@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 RSpec.describe AuthService::Api do
   describe '.auth' do
     context 'valid token' do
@@ -7,7 +9,7 @@ RSpec.describe AuthService::Api do
       let(:parsed_response) do
         { 'meta' => {
           'user_id' => '4'
-        }}
+        } }
       end
 
       before do

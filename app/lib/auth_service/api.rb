@@ -9,9 +9,9 @@ module AuthService
     def self.auth(token)
       options = { headers: {
         'AUTHORIZATION' => "Bearer #{token}"
-      }}
+      } }
       response = post('/auth', options)
-      
+
       response.parsed_response.dig('meta', 'user_id') if response.success?
     end
   end
