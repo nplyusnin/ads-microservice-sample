@@ -23,6 +23,7 @@ gem 'activesupport'
 gem 'fast_jsonapi'
 
 gem 'httparty'
+gem 'bunny'
 
 group :development, :test do
   gem 'byebug'

@@ -17,7 +17,6 @@ class AdRoutes < Application
 
     post do
       ad_params = validate_with!(AdParamsContract)
-
       user_id = AuthService::Api.auth(matched_token)
       coordinates = GeoService::Api.geocode(ad_params[:ad][:city])
 
