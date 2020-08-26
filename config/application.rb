@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class Application < Sinatra::Base
+  # helpers Sinatra::CustomLogger
   helpers Validations
 
   configure do
